@@ -1,0 +1,17 @@
+RewriteEngine on
+
+RewriteCond %{SERVER_PORT} !=443
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^ https://cbsecim.emrahyuksel.com.tr%{REQUEST_URI} [NS,R,L]
+
+
+#Seo url oluşturma
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^(.*)$ $1.php
+
+#404 hata sayfası yönlendirme kodu
+ErrorDocument 404 http://localhost/cbsecimanketi/
